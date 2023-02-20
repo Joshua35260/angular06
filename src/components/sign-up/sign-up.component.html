@@ -1,3 +1,43 @@
-<p>
-  sign-up works!
-</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="firstName">First Name</label>
+    <input type="text" id="firstName" formControlName="firstName" [ngClass]="{'invalid-input': userForm.controls['firstName'].invalid && (userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched), 'valid-input': userForm.controls['firstName'].valid && (userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched)}">
+    <div *ngIf="userForm.controls['firstName'].invalid && (userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched)">
+      <div *ngIf="userForm.controls['firstName'].errors?.['required']" class="error">Le prénom est requis</div>
+      <div *ngIf="userForm.controls['firstName'].errors?.['minlength']" class="error">Le prénom doit comporter au moins 3 caractères</div>
+      <div *ngIf="userForm.controls['firstName'].errors?.['maxlength']" class="error">Le prénom ne doit pas dépasser 15 caractères</div>
+    </div>
+  </div>
+  <div>
+    <label for="lastName">Last Name</label>
+    <input type="text" id="lastName" formControlName="lastName" [ngClass]="{'invalid-input': userForm.controls['lastName'].invalid && (userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched), 'valid-input': userForm.controls['lastName'].valid && (userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched)}">
+    <div *ngIf="userForm.controls['lastName'].invalid && (userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched)">
+      <div *ngIf="userForm.controls['lastName'].errors?.['required']" class="error">Le nom est requis</div>
+      <div *ngIf="userForm.controls['lastName'].errors?.['minlength']" class="error">Le nom doit comporter au moins 3 caractères</div>
+      <div *ngIf="userForm.controls['lastName'].errors?.['maxlength']" class="error">Le nom ne doit pas dépasser 15 caractères</div>
+    </div>
+  </div>
+  
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email" required [ngClass]="{'invalid-input': userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched), 'valid-input': userForm.controls['email'].valid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)}">
+    <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)" style="color: red;">
+      <div *ngIf="userForm.controls['email'].errors?.['required']">Le email est requis</div>
+      <div *ngIf="userForm.controls['email'].errors?.['email']">L'email est invalide</div>
+    </div>
+  </div>
+  
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password" 
+           [ngClass]="{'invalid-input': userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched), 
+                       'valid-input': userForm.controls['password'].valid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)}" 
+           minlength="8" required>
+    <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)" style="color: red;">
+      <div *ngIf="userForm.controls['password'].errors?.['required']">Le mot de passe est requis</div>
+      <div *ngIf="userForm.controls['password'].errors?.['minlength']">Le mot de passe doit être au moins de 8 caractères avec une majusucule, une minuscule, un chiffre et un caractère spécial</div>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!userForm.valid">Submit</button>
+</form>
