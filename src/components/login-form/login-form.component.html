@@ -1,3 +1,25 @@
-<p>
-  login-form works!
-</p>
+<h1>Formulaire atelier login</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  
+  <div>
+    <label for="email">Email</label>
+    <input type="email" formControlName="email" />
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" formControlName="password" />
+  </div>
+  
+  <button type="submit">Submit</button>
+
+  <div *ngIf="formSubmitted && loginForm.valid">
+    <p>Login validé</p>
+  </div>
+  
+  <div *ngIf="loginForm.invalid && formSubmitted">
+    <p *ngIf="loginForm.controls['email'].invalid">L'adresse email est invalide</p>
+    <p *ngIf="loginForm.controls['password'].invalid">Le mot de passe doit contenir au moins 6 caractères</p>
+  </div>
+  
+</form>
