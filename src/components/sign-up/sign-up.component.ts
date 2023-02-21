@@ -10,8 +10,9 @@ import { UserForm } from './user-form';
 })
 export class SignUpComponent implements OnInit {
 
-  userForm!: FormGroup;
-  user: UserForm = new UserForm();
+  
+  userForm: FormGroup = new FormGroup({});
+ 
 
   constructor(private formBuilder: FormBuilder) { }
 

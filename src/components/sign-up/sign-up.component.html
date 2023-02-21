@@ -31,9 +31,9 @@
   <div>
     <label for="password">Password</label>
     <input type="password" id="password" formControlName="password" 
-           [ngClass]="{'invalid-input': userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched), 
-                       'valid-input': userForm.controls['password'].valid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)}" 
-           minlength="8" required>
+          [ngClass]="{'invalid-input': userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched), 
+                      'valid-input': userForm.controls['password'].valid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)}" 
+        minlength="8" required>
     <div *ngIf="userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)" style="color: red;">
       <div *ngIf="userForm.controls['password'].errors?.['required']">Le mot de passe est requis</div>
       <div *ngIf="userForm.controls['password'].errors?.['minlength']">Le mot de passe doit être au moins de 8 caractères avec une majusucule, une minuscule, un chiffre et un caractère spécial</div>

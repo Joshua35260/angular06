@@ -9,6 +9,8 @@ import { SignUpComponent } from '../components/sign-up/sign-up.component';
 import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { MyFormComponent } from 'src/components/my-form/my-form.component';
 import { FormsModule } from '@angular/forms';
+import { SearchMovieComponent } from 'src/components/search-movie/search-movie.component';
+import { LoginFormComponent } from 'src/components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { FormsModule } from '@angular/forms';
     SignUpComponent,
     MenuComponent,
     MyFormComponent,
+    SearchMovieComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,

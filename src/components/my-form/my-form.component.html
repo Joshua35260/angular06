@@ -1,52 +1,62 @@
 <h1>Formulaire quete 04</h1>
-<form #myForm="ngForm" (ngSubmit)="myForm.valid && onSubmit()">
+
+<form (ngSubmit)="orderForm.valid && onSubmit()" [formGroup]="orderForm" #myForm="ngForm">
   <div>
     Form submitted ? {{myForm.submitted}}
-    Form valid ? {{myForm.valid}}
-    Form invalid ? {{myForm.invalid}}
+    Form valid ? {{orderForm.valid}}
+    Form invalid ? {{orderForm.valid}}
   </div>
-
-  <fieldset>
+  <div>
     <label for="title-order">Title</label>
-    <input id="title-order" name="title-order" type="text" required minlength="3" [(ngModel)]="model.title" #title="ngModel">
-  </fieldset>
-  <div *ngIf="title.errors">
-    <span *ngIf="title.errors?.['required']">Le titre est requis</span>
-    <span *ngIf="title.errors?.['minlength']">La longueur minimale doit être supérieure à 3</span>
+    <input name="title-order" type="text" formControlName="title">
+  </div>
+  <div *ngIf="orderForm.controls.title.errors">
+    <span *ngIf="orderForm.controls.title.errors['required']">Le champ title est requis</span>
+  </div>
+  <div>
+    <label for="quantity-order">Quantité</label>
+    <input name="quantity-order" type="number" formControlName="quantity">
+  </div>
+  <div *ngIf="orderForm.controls.quantity.errors">
+    <span *ngIf="orderForm.controls.quantity.errors['required']">Le champ quantité est requis</span>
+    <span *ngIf="orderForm.controls.quantity.errors['max']">La quantité maximal doit être inférieur à 5</span>
+  </div>
+  <div>
+    <label for="date-order">Date de commande</label>
+    <input name="date-order" type="date" formControlName="date">
+  </div>
+  <div *ngIf="orderForm.controls.date.errors">
+    <span *ngIf="orderForm.controls.date.errors['required']">Le champ quantité est requis</span>
+  </div>
+  <div>
+    <label for="contact-order">Contact</label>
+    <input name="contact-order" type="email" formControlName="contact">
+  </div>
+  <div *ngIf="orderForm.controls.contact.errors">
+    <span *ngIf="orderForm.controls.contact.errors['required']">Le champ contact est requis</span>
+    <span *ngIf="orderForm.controls.contact.errors['mail']">L'adresse email doit être valide</span>
+  </div>
+  <b>Payments : </b> <button type="button" (click)="addPayment()">Ajouter date paiement</button>
+  
+  <div [formGroupName]="i" *ngFor="let payment of ['payments']; let i=index">
+
+  <label for="date-{{i}}">Date</label>
+  <input name="date-{{i}}" type="date" formControlName="date">
+  <div *ngIf="['payments']controls[i].controls.date.errors">
+    <span *ngIf="['payments']controls[i].controls.date.errors.required">Le champ est requis</span>
+    <span *ngIf="['payments']controls[i].controls.date.errors.min">L'adresse email doit être valide</span>
   </div>
 
-  <fieldset>
-    <label for="contact-order">Quantité</label>
-    <input id="quantity-order" name="quantity-order" type="number" required [(ngModel)]="model.quantity" #quantity="ngModel">
-  </fieldset>
-  <div *ngIf="quantity.errors">
-    <span *ngIf="quantity.errors?.['required']">La quantité est requise</span>
-    </div>
-    
-    <fieldset>
-      <label for="date-order">Date de commande</label>
-      <input id="date-order" name="date-order" type="date" required [(ngModel)]="model.date" #date="ngModel">
-    </fieldset>
-    
-    <div *ngIf="date.errors">
-      <span *ngIf="date.errors?.['required']">La date est requise</span>
-    </div>
+  <label for="amount-{{i}}">Montant</label>
+  <input name="amount-{{i}}" type="text" formControlName="amount">
+  <div *ngIf="['payments']controls[i].controls.amount.errors">
+    <span *ngIf="['payments']controls[i].controls.amount.errors.required">Le champ montant est requis</span>
+  </div>
+    <hr>
+  </div>
 
-    
-    
-  
 
-  <fieldset>
-    <label for="contact-order">Contact</label>
-    <input id="contact-order" name="contact-order" type="email" required email [(ngModel)]="model.contact" #contact="ngModel">
-  </fieldset>
-  <div *ngIf="contact.errors">
-    <span *ngIf="contact.errors?.['required']">Un email est requis</span>
-    </div>
 
   <button type="reset">Restaurer</button>
   <button type="submit">Sauvegarder</button>
-
-
-
 </form>

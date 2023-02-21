@@ -1,0 +1,40 @@
+<h1>Formulaire quete 06</h1>
+
+<form [formGroup]="searchMovie" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="identifiant">Identifiant</label>
+    <input type="number" formControlName="identifiant">
+    </div>
+
+  <div>
+    <label for="title">Titre: </label>
+    <input type="text" formControlName="title">
+    
+  </div>
+  
+  <div>
+    <label for="type">Type: </label>
+    <select type="type" formControlName="type" Size="3">
+      <option>Film</option>  
+      <option>Série</option>  
+      <option>Épisode</option>
+      </select> 
+    </div>
+ 
+  <div>
+  <label for="date">Année de sortie</label>
+  <input name="date" type="date" formControlName="date">
+  
+  </div>
+
+  <div>
+    <label for="type">Fiche:: </label>
+    <select type="type" formControlName="type" Size="3">
+      <option>Courte</option>  
+      <option>Complète</option>  
+      </select> 
+    </div>
+  
+
+  <button type="submit" (click)="onSubmit()">Submit</button>
+</form>
