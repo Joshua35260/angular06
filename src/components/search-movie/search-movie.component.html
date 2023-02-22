@@ -1,40 +1,54 @@
-<h1>Formulaire quete 06</h1>
+<h2>Recherche de film</h2>
 
-<form [formGroup]="searchMovie" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="identifiant">Identifiant</label>
-    <input type="number" formControlName="identifiant">
-    </div>
+<form [formGroup]="movieSearch" (ngSubmit)="onSubmit()">
+  <label>
+    Type:
+    <select formControlName="type">
+      <option value="series">Séries</option>
+      <option value="movies">Films</option>
+    </select>
+  </label>
+  <br>
 
-  <div>
-    <label for="title">Titre: </label>
-    <input type="text" formControlName="title">
-    
+  <label>
+    Fiche:
+    <select formControlName="fiche">
+      <option value="courte">Courte</option>
+      <option value="longue">Longue</option>
+    </select>
+  </label>
+  <br>
+
+  <div formGroupName="identifiantTitre">
+    <label>
+      Identifiant:
+      <input type="number" formControlName="identifiant">
+      <div *ngIf="movieSearch.get('identifiantTitre.identifiant')?.invalid && (movieSearch.get('identifiantTitre.identifiant')?.dirty || movieSearch.get('identifiantTitre.identifiant')?.touched)">
+        <div *ngIf="movieSearch.get('identifiantTitre.identifiant')?.errors?.['required']">L'un des champs "Titre" ou "Identifiant" est requis.</div>
+        <div *ngIf="movieSearch.get('identifiantTitre.identifiant')?.errors?.['pattern']">Identifiant doit être un nombre.</div>
+      </div>
+    </label>
+    <br>
+    <label>
+      Titre:
+      <input type="text" formControlName="titre">
+      <div *ngIf="movieSearch.get('identifiantTitre.titre')?.invalid && (movieSearch.get('identifiantTitre.titre')?.dirty || movieSearch.get('identifiantTitre.titre')?.touched)">
+        L'un des champs "Titre" ou "Identifiant" est requis.
+      </div>
+    </label>
   </div>
-  
-  <div>
-    <label for="type">Type: </label>
-    <select type="type" formControlName="type" Size="3">
-      <option>Film</option>  
-      <option>Série</option>  
-      <option>Épisode</option>
-      </select> 
-    </div>
- 
-  <div>
-  <label for="date">Année de sortie</label>
-  <input name="date" type="date" formControlName="date">
-  
-  </div>
+  <br>
 
-  <div>
-    <label for="type">Fiche:: </label>
-    <select type="type" formControlName="type" Size="3">
-      <option>Courte</option>  
-      <option>Complète</option>  
-      </select> 
+  <label>
+    Année de sortie:
+    <input type="number" formControlName="anneeSortie">
+    <div *ngIf="movieSearch.get('anneeSortie')?.invalid && (movieSearch.get('anneeSortie')?.dirty || movieSearch.get('anneeSortie')?.touched)">
+      <div *ngIf="movieSearch.get('anneeSortie')?.errors?.['required']">Année de sortie est requise.</div>
+      <div *ngIf="movieSearch.get('anneeSortie')?.errors?.['min']">Année de sortie doit être entre {{ movieSearch.get('anneeSortie')?.errors?.['min'].minYear }} et {{ movieSearch.get('anneeSortie')?.errors?.['min'].maxYear }}.</div>
     </div>
-  
+  </label>
+  <div> {{ tellUser}} </div>
+  <br>
 
-  <button type="submit" (click)="onSubmit()">Submit</button>
+  <button type="submit">Rechercher</button>
 </form>

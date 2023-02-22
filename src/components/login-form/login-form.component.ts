@@ -7,11 +7,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  loginForm: FormGroup;
   formSubmitted = false;
-
+  
+  email: string = '';
+  password: string = '';
+  loginForm2: FormGroup;
   constructor(private formBuilder: FormBuilder) {
-    this.loginForm = this.formBuilder.group({
+    this.loginForm2 = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
@@ -22,7 +24,7 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
     this.formSubmitted = true;
-    if (this.loginForm.valid) {
+    if (this.loginForm2.valid) {
       console.log('Login validé');
     } else {
       console.log('Le formulaire est invalide');

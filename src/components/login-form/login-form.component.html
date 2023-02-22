@@ -1,25 +1,55 @@
-<h1>Formulaire atelier login</h1>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+
+<h1>Formulaire atelier login version template</h1>
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
   
   <div>
     <label for="email">Email</label>
-    <input type="email" formControlName="email" />
+    <input type="email" name="email" [(ngModel)]="email" required email />
+    <div *ngIf="loginForm.submitted && !loginForm.controls['email'].valid">
+      <p>L'adresse email est invalide</p>
+    </div>
   </div>
 
   <div>
     <label for="password">Password</label>
-    <input type="password" formControlName="password" />
+    <input type="password" name="password" [(ngModel)]="password" required minlength="6" />
+    <div *ngIf="loginForm.submitted && !loginForm.controls['password'].valid">
+      <p>Le mot de passe doit contenir au moins 6 caractères</p>
+    </div>
   </div>
   
   <button type="submit">Submit</button>
 
-  <div *ngIf="formSubmitted && loginForm.valid">
+  <div *ngIf="loginForm.valid && loginForm.submitted">
     <p>Login validé</p>
   </div>
+
+  <!-- DEUXIEME VERSION -->
+
   
-  <div *ngIf="loginForm.invalid && formSubmitted">
-    <p *ngIf="loginForm.controls['email'].invalid">L'adresse email est invalide</p>
-    <p *ngIf="loginForm.controls['password'].invalid">Le mot de passe doit contenir au moins 6 caractères</p>
-  </div>
+  <h1>Formulaire atelier login version reactive</h1>
+  <form [formGroup]="loginForm2" (ngSubmit)="onSubmit()">
+    
+    <div>
+      <label for="email">Email</label>
+      <input type="email" formControlName="email" />
+    </div>
   
-</form>
+    <div>
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" />
+    </div>
+    
+    <button type="submit">Submit</button>
+  
+    <div *ngIf="formSubmitted && loginForm2.valid">
+      <p>Login validé</p>
+    </div>
+    
+    <div *ngIf="loginForm2.invalid && formSubmitted">
+      <p *ngIf="loginForm2.controls['email'].invalid">L'adresse email est invalide</p>
+      <p *ngIf="loginForm2.controls['password'].invalid">Le mot de passe doit contenir au moins 6 caractères</p>
+    </div>
+    
+  </form>
