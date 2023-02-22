@@ -6,7 +6,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MenuComponent } from '../components/menu/menu.component';
 import { SignUpComponent } from '../components/sign-up/sign-up.component';
-import { UserProfileComponent } from '../components/user-profile/user-profile.component';
 import { MyFormComponent } from 'src/components/my-form/my-form.component';
 
 
@@ -22,7 +21,6 @@ import { MovieSearchComponent } from 'src/components/search-movie/search-movie.c
 @NgModule({
   declarations: [
     AppComponent,
-    UserProfileComponent,
     SignUpComponent,
     MenuComponent,
     MyFormComponent,

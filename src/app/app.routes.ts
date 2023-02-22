@@ -8,7 +8,6 @@ import { MovieSearchComponent } from '../components/search-movie/search-movie.co
 
 const ROUTES: Routes =[
   {path: '', component: UserProfileComponent},
-  {path: 'user', component: UserProfileComponent},
   {path: 'sign-up', component: SignUpComponent},
   {path: 'movie', component: MovieSearchComponent},
   {path: 'login', component: LoginFormComponent},
